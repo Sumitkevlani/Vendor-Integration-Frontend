@@ -5,6 +5,8 @@ import Home from './components/Home.jsx';
 import Vendors from './components/Vendors.jsx';
 import Footer from './components/Footer.jsx';
 import './App.css';
+import Transactions from './components/Transactions.jsx';
+import TransactionDetails from './components/TransactionDetails.jsx';
 
 function App() {
   return (
@@ -14,7 +16,9 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/vendors" element={<Vendors />} />
-          {/* Add other routes here */}
+          <Route path="/transactions" element={<Transactions/>} />
+          <Route path="/transaction/:id" element={<TransactionDetails />} />
+          <Route path="/analytics" element={<TransactionDetails />} />  
         </Routes>
         <Footer />
       </div>
