@@ -1,0 +1,25 @@
+.card {
+border: 1px solid #ccc;
+padding: 16px;
+margin: 16px;
+border-radius: 8px;
+text-align: center;
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+margin-bottom: 100px;
+transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card h3 {
+margin-top: 0;
+}
+
+.card-img{
+    display: inline-block;
+    height: 200px;
+    width: 100%;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }

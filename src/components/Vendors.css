@@ -1,0 +1,32 @@
+.vendors {
+padding: 20px;
+text-align: center;
+}
+
+.vendor-list {
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+}
+
+.vendor-card {
+border: 1px solid #ccc;
+padding: 16px;
+margin: 16px;
+border-radius: 8px;
+text-align: center;
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+width: 200px;
+transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.vendor-card:hover {
+transform: scale(1.05);
+box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.vendor-logo {
+height: 100px;
+width: 100%;
+margin-bottom: 10px;
+}
