@@ -1,0 +1,27 @@
+.content-with-image {
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .content {
+    flex: 1;
+    text-align: justify; 
+    margin-right: 20px;
+    font-size: 20px;
+  }
+  
+  .image {
+    flex: 1;
+  }
+  
+  .image img {
+    width: 100%;
+    border-radius: 8px;
+  }
+  

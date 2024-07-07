@@ -1,59 +1,102 @@
+/* TransactionDetails.css */
+
+/* Container for transaction details */
 .transaction-details-container {
-display: flex;
-justify-content: space-between;
-align-items: flex-start;
-padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  margin: 20px;
 }
 
+/* Styles for the vendor details section */
 .vendor-details {
-flex: 1;
-max-width: 300px;
-text-align: left;
+  flex: 1;
+  max-width: 300px;
+  text-align: left;
+  padding: 20px;
+  background-color: #ffffff; /* White background */
+  border: 1px solid #e0e0e0; /* Light gray border */
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Soft shadow */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Font family */
 }
 
 .vendor-logo {
-width: 100%;
-max-width: 150px;
-border-radius: 8px;
-margin-bottom: 10px;
+  width: 100%;
+  max-width: 200px; /* Adjust size for larger logos */
+  height: auto; /* Maintain aspect ratio */
+  border-radius: 8px;
+  margin-bottom: 20px; /* Increase margin for spacing */
 }
 
+/* Vendor name and details */
+.vendor-details h2 {
+  font-size: 24px; /* Larger heading size */
+  color: #333; /* Darker text color */
+  margin-bottom: 10px; /* Bottom margin */
+}
+
+.vendor-details p {
+  font-size: 16px; /* Font size */
+  color: #666; /* Slightly darker text color */
+  margin-bottom: 8px; /* Bottom margin */
+}
+
+.vendor-details p:last-child {
+  margin-bottom: 0; /* Remove margin bottom for last paragraph */
+}
+
+/* Styles for the transaction details section */
 .transaction-details {
-flex: 2;
-padding: 20px;
-background-color: #f5f5f5;
-border: 1px solid #ccc;
-border-radius: 8px;
-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  flex: 2;
+  padding: 20px;
+  background-color: #f9f9f9; /* Light gray background */
+  border: 1px solid #e0e0e0; /* Light gray border */
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Soft shadow */
 }
 
 .transaction-details h1 {
-margin-top: 0;
+  margin-top: 0;
+  font-size: 24px; /* Larger heading size */
+  margin-bottom: 20px; /* Increase bottom margin */
 }
 
+/* Detail rows */
 .detail-row {
-display: flex;
-margin-bottom: 10px;
+  display: flex;
+  align-items: flex-start; /* Align items at the start */
+  margin-bottom: 12px; /* Bottom margin */
 }
 
 .detail-label {
-flex: 1;
-font-weight: bold;
-text-align: right;
-padding-right: 10px;
+  flex: 1;
+  font-weight: bold;
+  color: #666; /* Slightly darker text color */
+  text-align: right;
+  margin-right: 12px; /* Right margin */
 }
 
 .detail-value {
-flex: 2;
-text-align: left;
+  flex: 2;
+  color: #333;
+  /* Adjust these styles to ensure details are aligned in a single line */
+  white-space: nowrap; /* Prevent wrapping */
+  overflow: hidden; /* Hide overflow */
+  text-overflow: ellipsis; /* Show ellipsis for overflow */
 }
 
+/* Cancel button */
 .cancel-button {
-margin-top: 20px;
+  margin-top: 20px;
 }
 
+/* Attachments */
 .detail-row a {
-margin-right: 10px;
-text-decoration: none;
-color: #007bff; /* Link color */
+  margin-right: 10px;
+  text-decoration: none;
+  color: #007bff; /* Link color */
+}
+
+.detail-row a:hover {
+  text-decoration: underline; /* Underline on hover */
 }

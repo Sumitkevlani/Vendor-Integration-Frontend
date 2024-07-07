@@ -1,48 +1,32 @@
-import React from 'react';
+// TransactionDetails.jsx
+
+import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchTransactionById } from '../actions/transactionActions';
 import { Button } from '@mui/material';
 import './TransactionDetails.css';
 import amazon from '../assets/amazon.png';
-import cisco from '../assets/cisco.png';
-import dell from '../assets/nescafe.png';
-import sap from '../assets/sap.jpeg';
-import paypal from '../assets/paypal.png';
-import mastercard from '../assets/mastercard.png';
 import intuit from '../assets/intuit.png';
-
-const transactionsData = [
-  { 
-    id: 1, 
-    transactionId: 'TXN001', 
-    amount: 500, 
-    vendor: 'Amazon', 
-    status: 'Completed', 
-    time: '2023-12-01 14:30:00',
-    type: 'Buyer',
-    paymentMethod: 'Credit Card',
-    contactEmail: 'vendor1@example.com', 
-    billingAddress: '123 Main Street, City, Country',
-    notes: 'Payment for services rendered.', 
-    attachments: [
-      { name: 'Invoice.pdf', url: '/invoices/invoice1.pdf' },
-      { name: 'Receipt.jpg', url: '/receipts/receipt1.jpg' }
-    ]
-  },
- 
-];
+import paypal from '../assets/paypal.png';
 
 const vendorImages = {
-  'Amazon': amazon, // Example path, replace with actual paths or URLs
+  'Amazon': amazon,
   'Intuit': intuit,
   'PayPal': paypal,
 };
 
 const TransactionDetails = () => {
   const { id } = useParams();
-  const transaction = transactionsData.find((txn) => txn.id === parseInt(id, 10));
+  const dispatch = useDispatch();
+  const transaction = useSelector(state => state.transactionReducer.transaction);
+
+  useEffect(() => {
+    dispatch(fetchTransactionById(id));
+  }, [dispatch, id]);
 
   if (!transaction) {
-    return <div>Transaction not found</div>;
+    return <div>Loading...</div>;
   }
 
   const getStatusColor = (status) => {

@@ -7,6 +7,7 @@ import Footer from './components/Footer.jsx';
 import './App.css';
 import Transactions from './components/Transactions.jsx';
 import TransactionDetails from './components/TransactionDetails.jsx';
+import Analytics from './components/Analytics.jsx';
 
 function App() {
   return (
@@ -18,7 +19,7 @@ function App() {
           <Route path="/vendors" element={<Vendors />} />
           <Route path="/transactions" element={<Transactions/>} />
           <Route path="/transaction/:id" element={<TransactionDetails />} />
-          <Route path="/analytics" element={<TransactionDetails />} />  
+          <Route path="/analytics" element={<Analytics />} />  
         </Routes>
         <Footer />
       </div>
