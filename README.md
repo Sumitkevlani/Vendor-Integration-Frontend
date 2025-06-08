@@ -143,3 +143,93 @@ graph TB
     class PC,CW,TC,CILC,RCW integration
     class TS,RMS_EXT external
 ```
+
+```mermaid
+sequenceDiagram
+    participant OM as 🏢 Orders Microservice
+    participant TT as 🔄 Trendyol Transform
+    participant CW as 🌐 Client Wrapper
+    participant TS as 🛒 Trendyol Store
+    participant RM as 📦 RMS System
+
+    Note over OM,RM: 📋 Order Processing Timeline
+
+    %% 1. Order Fetch
+    Note over OM,TS: 1️⃣ Order Fetch Process
+    OM->>+TT: 📥 Fetch Orders Request
+    TT->>+CW: ➡️ Forward Request
+    CW->>+TS: 🔍 GET /orders (limit: 200, page: 50)
+    TS-->>-CW: 📄 Order List Response
+    CW-->>-TT: 📊 Order Data
+    TT-->>-OM: ✨ Transformed Order Data
+
+    %% 2. Order Status Update
+    Note over OM,TS: 2️⃣ Order Status Update
+    OM->>+TT: ✅ Update Order Status
+    TT->>+CW: 🔄 Update Package Status
+    CW->>+TS: 📝 PUT /shipment-packages/{orderCode}
+    TS-->>-CW: ✅ Update Confirmation
+    CW-->>-TT: 🎉 Success Response
+    TT-->>-OM: ✅ Status Updated
+
+    %% 3. Fetch Order Status
+    Note over OM,TS: 3️⃣ Fetch Order Status
+    OM->>+TT: 🔍 Get Order Status
+    TT->>+CW: 🎯 Get Orders by IDs
+    CW->>+TS: 📋 GET /orders?shipmentPackageIds={ids}
+    TS-->>-CW: 📊 Order Status
+    CW-->>-TT: 📄 Order Data
+    TT-->>-OM: 🔄 Status Update
+
+    %% 4. Seller Cancellation
+    Note over OM,TS: 4️⃣ Seller Cancellation
+    OM->>+TT: 🛑 Cancel Order Request
+    TT->>+CW: ❌ Submit Cancellation
+    CW->>+TS: 🚫 POST /cancel (reasonId: 501)
+    TS-->>-CW: ✅ Cancellation Confirmation
+    CW-->>-TT: 🎉 Success Response
+    TT-->>-OM: ✅ Cancellation Confirmed
+
+    %% 5. Create Shipment
+    Note over OM,RM: 5️⃣ Create Shipment
+    OM->>+TT: 📦 Create Shipment
+    TT->>+RM: 💰 Generate Tax & Invoice
+    RM-->>-TT: 📄 Tax & Invoice Data
+    TT->>+RM: 🏷️ Generate Shipping Label
+    RM-->>-TT: 📋 Label Data
+    TT->>+CW: 🚚 Update Tracking Number
+    CW->>+TS: 📝 PUT /shipment-packages/{code}/update-tracking
+    TS-->>-CW: ✅ Tracking Updated
+    CW-->>-TT: 🎉 Success Response
+    TT-->>-OM: 📦 Shipment Created
+
+    %% 6. Split Package
+    Note over OM,TS: 6️⃣ Split Package
+    OM->>+TT: ✂️ Split Order Request
+    TT->>+CW: 📦 Split Package
+    CW->>+TS: 📝 POST /shipment-packages/{code}/split
+    TS-->>-CW: ✅ Split Confirmation
+    CW-->>-TT: 🎉 Success Response
+    TT-->>-OM: ✅ Split Completed
+
+    %% 7. Get Shipment
+    Note over OM,RM: 7️⃣ Get Shipment Details
+    OM->>+TT: 📋 Get Shipment
+    TT->>+RM: 💰 Get Tax Data
+    RM-->>-TT: 📊 Tax Info
+    TT->>+RM: 📄 Get Invoice PDF
+    RM-->>-TT: 📄 Invoice Data
+    TT->>+RM: 🏷️ Get Shipping Label
+    RM-->>-TT: 📋 Label Data
+    TT-->>-OM: 📦 Complete Shipment Data
+
+    %% Styling
+    %%{init: {'theme':'base', 'themeVariables': {
+      'primaryColor': '#b06565',
+      'primaryTextColor': '#fff',
+      'primaryBorderColor': '#905959',
+      'lineColor': '#5f27cd',
+      'secondaryColor': '#f9e79f',
+      'tertiaryColor': '#ff9ff3'
+    }}}%%
+```
