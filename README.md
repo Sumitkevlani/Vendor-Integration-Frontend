@@ -72,7 +72,7 @@ Follow these steps to set up and run the project locally:
 - The application will open in your default web browser at http://localhost:5173/.
 
 
-```
+```mermaid
 graph TB
     subgraph "ICC Core Microservices"
         OM[Orders Microservice]
