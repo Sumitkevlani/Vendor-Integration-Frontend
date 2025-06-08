@@ -70,3 +70,76 @@ Follow these steps to set up and run the project locally:
 ## Access the application
 
 - The application will open in your default web browser at http://localhost:5173/.
+
+
+```
+graph TB
+    subgraph "ICC Core Microservices"
+        OM[Orders Microservice]
+        IM[Inventory Microservice]
+        RM[Returns Microservice]
+        RMS[RMS Service]
+    end
+
+    subgraph "Transform Layer"
+        TT[Trendyol Transform]
+        OD[Order DTO]
+        ID[Inventory DTO]
+        RD[Return DTO]
+        SD[Shipment DTO]
+        DH[DTO Helper]
+    end
+
+    subgraph "Integration Layer"
+        PC[Portal Client]
+        CW[Client Wrapper API]
+        TC[Trendyol Client]
+        CILC[Custom Invoice & Label Client]
+        RCW[RMS Client Wrapper]
+    end
+
+    subgraph "External Systems"
+        TS[Trendyol Store]
+        RMS_EXT[RMS External]
+    end
+
+    %% Core to Transform
+    OM --> OD
+    IM --> ID
+    RM --> RD
+    RMS --> SD
+
+    %% Transform Internal
+    OD --> DH
+    ID --> DH
+    RD --> DH
+    SD --> DH
+
+    %% Transform to Integration
+    OD --> CW
+    ID --> CW
+    RD --> CW
+    SD --> CILC
+
+    %% Integration Layer Communication
+    CW --> TC
+    TC --> PC
+    CILC --> PC
+    CW --> RCW
+
+    %% Integration to External
+    TC --> TS
+    RCW --> RMS_EXT
+    CILC --> RMS_EXT
+
+    %% Styling
+    classDef microservice fill:#e1f5fe,color:#000;
+    classDef transform fill:#f3e5f5,color:#000;
+    classDef integration fill:#e8f5e8,color:#000;
+    classDef external fill:#fff3e0,color:#000;
+
+    class OM,IM,RM,RMS microservice
+    class TT,OD,ID,RD,SD,DH transform
+    class PC,CW,TC,CILC,RCW integration
+    class TS,RMS_EXT external
+```
